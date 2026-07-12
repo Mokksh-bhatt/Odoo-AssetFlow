@@ -33,6 +33,8 @@ class AssetflowApprovalMixin(models.AbstractModel):
             if record.state != 'draft':
                 raise UserError(_("Only draft records can be submitted."))
             record.state = 'pending'
+            if hasattr(record, '_on_submit'):
+                record._on_submit()
 
     def action_approve(self):
         """
@@ -47,6 +49,8 @@ class AssetflowApprovalMixin(models.AbstractModel):
                 'approver_id': self.env.user.id,
                 'approval_date': fields.Datetime.now()
             })
+            if hasattr(record, '_on_approve'):
+                record._on_approve()
 
     def action_reject(self, reason=None):
         """
@@ -62,3 +66,5 @@ class AssetflowApprovalMixin(models.AbstractModel):
                 'approval_date': fields.Datetime.now(),
                 'rejection_reason': reason or _("No reason provided.")
             })
+            if hasattr(record, '_on_reject'):
+                record._on_reject()

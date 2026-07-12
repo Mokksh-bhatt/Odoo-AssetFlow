@@ -17,7 +17,7 @@
         <record id="rule_assetflow_booking_dept_head" model="ir.rule">
             <field name="name">AssetFlow Booking: Department Head</field>
             <field name="model_id" ref="model_assetflow_booking"/>
-            <field name="domain_force">['|', ('booked_by_id', '=', user.id), ('department_id', 'child_of', [user.assetflow_department_id.id])]</field>
+            <field name="domain_force">['|', ('booked_by_id', '=', user.id), ('department_id', 'child_of', user.assetflow_department_id.ids)]</field>
             <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_department_head'))]"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_write" eval="1"/>

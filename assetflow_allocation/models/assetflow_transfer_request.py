@@ -5,8 +5,8 @@ from odoo.exceptions import ValidationError
 class AssetflowTransferRequest(models.Model):
     _name = 'assetflow.transfer.request'
     _description = 'Asset Transfer Request'
-    _inherit = ['assetflow.approval.mixin']
-    _order = 'create_date desc'
+    _inherit = ['mail.thread', 'assetflow.approval.mixin']
+    _order = 'create_date desc, id desc'
 
     asset_id = fields.Many2one('assetflow.asset', string='Asset', required=True)
     requester_id = fields.Many2one('res.users', string='Requested By', default=lambda self: self.env.user, required=True)
@@ -29,7 +29,7 @@ class AssetflowTransferRequest(models.Model):
                 active_allocation.return_condition_notes = "Transferred via Transfer Request."
                 active_allocation._close_allocation()
                 
-            self.env['assetflow.allocation'].create({
+            self.env['assetflow.allocation'].sudo().create({
                 'asset_id': record.asset_id.id,
                 'employee_id': record.target_employee_id.id,
                 'allocated_by': self.env.user.id,

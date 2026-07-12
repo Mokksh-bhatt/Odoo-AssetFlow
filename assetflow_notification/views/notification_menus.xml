@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <menuitem id="menu_assetflow_notifications"
-              name="Notifications"
-              parent="assetflow_base.menu_assetflow_root"
-              action="action_assetflow_notification"
-              sequence="90"/>
-</odoo>

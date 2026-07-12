@@ -5,7 +5,7 @@
         <field name="name">assetflow.booking.tree</field>
         <field name="model">assetflow.booking</field>
         <field name="arch" type="xml">
-            <tree string="Bookings" decoration-info="status == 'upcoming'" decoration-success="status == 'ongoing'" decoration-muted="status == 'cancelled'">
+            <list string="Bookings" decoration-info="status == 'upcoming'" decoration-success="status == 'ongoing'" decoration-muted="status == 'cancelled'">
                 <field name="asset_id"/>
                 <field name="booked_by_id"/>
                 <field name="department_id" optional="show"/>
@@ -15,7 +15,7 @@
                        decoration-info="status == 'upcoming'" 
                        decoration-success="status == 'ongoing'" 
                        decoration-muted="status == 'cancelled'"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -88,7 +88,7 @@
                 <filter string="Completed" name="completed" domain="[('status', '=', 'completed')]"/>
                 <filter string="Cancelled" name="cancelled" domain="[('status', '=', 'cancelled')]"/>
                 
-                <group expand="0" string="Group By">
+                <group>
                     <filter string="Asset" name="group_by_asset" context="{'group_by': 'asset_id'}"/>
                     <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
                     <filter string="Department" name="group_by_department" context="{'group_by': 'department_id'}"/>
@@ -101,7 +101,7 @@
     <record id="action_assetflow_booking_calendar" model="ir.actions.act_window">
         <field name="name">Booking Calendar</field>
         <field name="res_model">assetflow.booking</field>
-        <field name="view_mode">calendar,tree,form</field>
+        <field name="view_mode">calendar,list,form</field>
         <field name="search_view_id" ref="view_assetflow_booking_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -113,7 +113,7 @@
     <record id="action_assetflow_booking_my" model="ir.actions.act_window">
         <field name="name">My Bookings</field>
         <field name="res_model">assetflow.booking</field>
-        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_mode">list,form,calendar</field>
         <field name="context">{'search_default_upcoming': 1}</field>
         <field name="domain">[('booked_by_id', '=', uid)]</field>
         <field name="search_view_id" ref="view_assetflow_booking_search"/>

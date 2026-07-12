@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'AssetFlow Allocation',
-    'version': '1.0',
+    'version': '19.0.1.0.0',
     'category': 'AssetFlow',
     'summary': 'AssetFlow Allocation and Transfer Module',
     'description': """

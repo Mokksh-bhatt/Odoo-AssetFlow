@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_audit_line_generate_wizard_form" model="ir.ui.view">
+        <field name="name">assetflow.audit.line.generate.wizard.form</field>
+        <field name="model">assetflow.audit.line.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Audit Lines">
+                <group>
+                    <field name="cycle_id" readonly="1"/>
+                </group>
+                <p>This will generate audit lines for all assets matching the cycle scope.</p>
+                <footer>
+                    <button string="Generate" name="generate_lines" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

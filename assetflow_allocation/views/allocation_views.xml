@@ -4,14 +4,14 @@
         <field name="name">assetflow.allocation.tree</field>
         <field name="model">assetflow.allocation</field>
         <field name="arch" type="xml">
-            <tree string="Allocations" decoration-success="status == 'active'" decoration-muted="status == 'returned'">
+            <list string="Allocations" decoration-success="status == 'active'" decoration-muted="status == 'returned'">
                 <field name="asset_id"/>
                 <field name="employee_id"/>
                 <field name="department_id" optional="show"/>
                 <field name="allocation_date"/>
                 <field name="expected_return_date" optional="show"/>
                 <field name="status" widget="badge" decoration-success="status == 'active'" decoration-muted="status == 'returned'"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -59,7 +59,7 @@
                 <separator/>
                 <filter string="Active" name="active" domain="[('status', '=', 'active')]"/>
                 <filter string="Returned" name="returned" domain="[('status', '=', 'returned')]"/>
-                <group expand="0" string="Group By">
+                <group>
                     <filter string="Asset" name="group_by_asset" context="{'group_by': 'asset_id'}"/>
                     <filter string="Employee" name="group_by_employee" context="{'group_by': 'employee_id'}"/>
                     <filter string="Department" name="group_by_department" context="{'group_by': 'department_id'}"/>
@@ -72,7 +72,7 @@
     <record id="action_assetflow_allocation" model="ir.actions.act_window">
         <field name="name">Allocations</field>
         <field name="res_model">assetflow.allocation</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_assetflow_allocation_search"/>
         <field name="context">{'search_default_active': 1}</field>
     </record>

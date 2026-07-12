@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_asset_employee,asset.employee,model_assetflow_asset,assetflow_base.group_assetflow_employee,1,0,0,0
+access_asset_manager,asset.manager,model_assetflow_asset,assetflow_base.group_assetflow_asset_manager,1,1,1,0
+access_asset_admin,asset.admin,model_assetflow_asset,assetflow_base.group_assetflow_admin,1,1,1,1
+access_location_employee,location.employee,model_assetflow_location,assetflow_base.group_assetflow_employee,1,0,0,0
+access_location_manager,location.manager,model_assetflow_location,assetflow_base.group_assetflow_asset_manager,1,1,1,1
+access_state_log_employee,state.log.employee,model_assetflow_asset_state_log,assetflow_base.group_assetflow_employee,1,0,0,0
+access_state_log_manager,state.log.manager,model_assetflow_asset_state_log,assetflow_base.group_assetflow_asset_manager,1,1,1,0
+access_state_log_admin,state.log.admin,model_assetflow_asset_state_log,assetflow_base.group_assetflow_admin,1,1,1,1
+access_cat_val_employee,cat.val.employee,model_assetflow_asset_category_value,assetflow_base.group_assetflow_employee,1,0,0,0
+access_cat_val_manager,cat.val.manager,model_assetflow_asset_category_value,assetflow_base.group_assetflow_asset_manager,1,1,1,1

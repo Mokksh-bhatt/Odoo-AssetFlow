@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Auditors see cycles they are assigned to -->
+        <record id="rule_audit_cycle_auditor" model="ir.rule">
+            <field name="name">AssetFlow Audit: Auditor View</field>
+            <field name="model_id" ref="model_assetflow_audit_cycle"/>
+            <field name="domain_force">[('auditor_ids', 'in', user.id)]</field>
+            <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_employee'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+        
+        <!-- Dept heads see audits in their department -->
+        <record id="rule_audit_cycle_dept_head" model="ir.rule">
+            <field name="name">AssetFlow Audit: Dept Head View</field>
+            <field name="model_id" ref="model_assetflow_audit_cycle"/>
+            <field name="domain_force">[('department_id', '=', user.assetflow_department_id.id)]</field>
+            <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_department_head'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <!-- Admin sees all -->
+        <record id="rule_audit_cycle_admin" model="ir.rule">
+            <field name="name">AssetFlow Audit: Admin All</field>
+            <field name="model_id" ref="model_assetflow_audit_cycle"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_admin'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+    </data>
+</odoo>

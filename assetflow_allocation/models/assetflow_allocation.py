@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class AssetflowAllocation(models.Model):
     _name = 'assetflow.allocation'
     _description = 'Asset Allocation'
+    _inherit = ['mail.thread']
     _order = 'allocation_date desc, id desc'
 
     asset_id = fields.Many2one('assetflow.asset', string='Asset', required=True)
@@ -23,12 +24,6 @@ class AssetflowAllocation(models.Model):
     
     active = fields.Boolean(string='Active Record', default=True)
 
-    def init(self):
-        self.env.cr.execute("""
-            CREATE UNIQUE INDEX IF NOT EXISTS assetflow_allocation_unique_active 
-            ON assetflow_allocation (asset_id) WHERE status = 'active';
-        """)
-
     @api.constrains('asset_id', 'status')
     def _check_single_active_allocation(self):
         for record in self:
@@ -43,11 +38,25 @@ class AssetflowAllocation(models.Model):
                     holder_name = existing.employee_id.name if existing.employee_id else "another user"
                     raise ValidationError(_(
                         "Asset '%s' is already actively allocated to %s. "
-                        "Please request a transfer instead."
+                        "Please use a Transfer Request to reassign it."
                     ) % (record.asset_id.name, holder_name))
 
     @api.model_create_multi
     def create(self, vals_list):
+        # Pre-flight uniqueness check before any DB write - gives user-friendly error
+        for vals in vals_list:
+            if vals.get('status', 'active') == 'active' and vals.get('asset_id'):
+                existing = self.search([
+                    ('asset_id', '=', vals['asset_id']),
+                    ('status', '=', 'active'),
+                ], limit=1)
+                if existing:
+                    asset = self.env['assetflow.asset'].browse(vals['asset_id'])
+                    holder_name = existing.employee_id.name if existing.employee_id else "another user"
+                    raise ValidationError(_(
+                        "Asset '%s' is already actively allocated to %s. "
+                        "Please return or transfer the asset first."
+                    ) % (asset.name, holder_name))
         records = super().create(vals_list)
         for record in records:
             if record.status == 'active' and record.asset_id:

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_assetflow_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">assetflow_dashboard_action</field>
+    </record>
+
+    <!-- This should be the first menu item -->
+    <menuitem id="menu_assetflow_dashboard"
+              name="Dashboard"
+              parent="assetflow_base.menu_assetflow_root"
+              action="action_assetflow_dashboard"
+              sequence="5"/>
+</odoo>

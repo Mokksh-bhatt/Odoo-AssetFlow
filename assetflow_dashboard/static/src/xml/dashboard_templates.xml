@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="assetflow_dashboard.Dashboard" owl="1">
+        <div class="o_action_manager">
+            <div class="container-fluid py-4">
+                <h1 class="mb-4">AssetFlow Dashboard</h1>
+                <div class="row">
+                    <!-- Total Assets -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card text-white bg-primary shadow-sm" style="cursor: pointer;" t-on-click="() => this.openAssets()">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Assets</h5>
+                                <h2 class="card-text" t-esc="state.data.total_assets"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Available -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card text-white bg-info shadow-sm" style="cursor: pointer;" t-on-click="() => this.openAssets('available')">
+                            <div class="card-body">
+                                <h5 class="card-title">Available</h5>
+                                <h2 class="card-text" t-esc="state.data.available_assets"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Allocated -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card text-white bg-success shadow-sm" style="cursor: pointer;" t-on-click="() => this.openAssets('allocated')">
+                            <div class="card-body">
+                                <h5 class="card-title">Allocated</h5>
+                                <h2 class="card-text" t-esc="state.data.allocated_assets"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Maintenance -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card text-white bg-warning shadow-sm" style="cursor: pointer;" t-on-click="() => this.openAssets('maintenance')">
+                            <div class="card-body">
+                                <h5 class="card-title">In Maintenance</h5>
+                                <h2 class="card-text" t-esc="state.data.maintenance_assets"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bookings -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card text-white bg-secondary shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Active Bookings</h5>
+                                <h2 class="card-text" t-esc="state.data.total_bookings"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

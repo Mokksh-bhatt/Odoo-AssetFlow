@@ -16,7 +16,7 @@
         <record id="rule_allocation_dept_head" model="ir.rule">
             <field name="name">AssetFlow Allocation: Dept Head</field>
             <field name="model_id" ref="model_assetflow_allocation"/>
-            <field name="domain_force">['|', ('employee_id', '=', user.id), ('department_id', 'child_of', [user.assetflow_department_id.id])]</field>
+            <field name="domain_force">['|', ('employee_id', '=', user.id), ('department_id', 'child_of', user.assetflow_department_id.ids)]</field>
             <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_department_head'))]"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_write" eval="0"/>
@@ -50,7 +50,7 @@
         <record id="rule_transfer_dept_head" model="ir.rule">
             <field name="name">AssetFlow Transfer: Dept Head</field>
             <field name="model_id" ref="model_assetflow_transfer_request"/>
-            <field name="domain_force">['|', ('requester_id', '=', user.id), ('target_department_id', 'child_of', [user.assetflow_department_id.id])]</field>
+            <field name="domain_force">['|', ('requester_id', '=', user.id), ('target_department_id', 'child_of', user.assetflow_department_id.ids)]</field>
             <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_department_head'))]"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_write" eval="1"/>

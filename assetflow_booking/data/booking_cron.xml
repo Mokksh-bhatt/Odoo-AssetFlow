@@ -9,7 +9,7 @@
             <field name="code">model._update_booking_status()</field>
             <field name="interval_number">5</field>
             <field name="interval_type">minutes</field>
-            <field name="numbercall">-1</field>
+            
             <field name="active" eval="True"/>
         </record>
 
@@ -21,7 +21,7 @@
             <field name="code">model._send_reminders()</field>
             <field name="interval_number">5</field>
             <field name="interval_type">minutes</field>
-            <field name="numbercall">-1</field>
+            
             <field name="active" eval="True"/>
         </record>
     </data>

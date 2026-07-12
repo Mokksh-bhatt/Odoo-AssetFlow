@@ -6,6 +6,7 @@ from datetime import timedelta
 class AssetflowBooking(models.Model):
     _name = 'assetflow.booking'
     _description = 'Asset Booking'
+    _inherit = ['mail.thread']
     _order = 'start_datetime desc, id desc'
 
     name = fields.Char(string='Reference', compute='_compute_name', store=True)

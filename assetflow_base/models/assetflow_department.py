@@ -19,7 +19,7 @@ class AssetflowDepartment(models.Model):
         index=True, 
         ondelete='restrict'
     )
-    parent_path = fields.Char(index=True, unaccent=False)
+    parent_path = fields.Char(index=True)
     child_ids = fields.One2many(
         'assetflow.department', 
         'parent_id', 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_audit_cycle_list" model="ir.ui.view">
+        <field name="name">assetflow.audit.cycle.list</field>
+        <field name="model">assetflow.audit.cycle</field>
+        <field name="arch" type="xml">
+            <list string="Audit Cycles">
+                <field name="name"/>
+                <field name="scope_type"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'in_progress'" decoration-success="state == 'closed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_audit_cycle_form" model="ir.ui.view">
+        <field name="name">assetflow.audit.cycle.form</field>
+        <field name="model">assetflow.audit.cycle</field>
+        <field name="arch" type="xml">
+            <form string="Audit Cycle">
+                <header>
+                    <button name="action_start_audit" string="Start Audit" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_generate_lines" string="Generate Lines" type="object" invisible="state != 'in_progress'"/>
+                    <button name="action_close_audit" string="Close Audit" type="object" class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="scope_type" readonly="state != 'draft'"/>
+                            <field name="department_id" invisible="scope_type != 'department'" required="scope_type == 'department'" readonly="state != 'draft'"/>
+                            <field name="location_id" invisible="scope_type != 'location'" required="scope_type == 'location'" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="date_from" readonly="state != 'draft'"/>
+                            <field name="date_to" readonly="state != 'draft'"/>
+                            <field name="auditor_ids" widget="many2many_tags" readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Audit Lines">
+                            <field name="line_ids" readonly="state == 'closed'">
+                                <list editable="bottom" decoration-muted="result == 'verified'" decoration-danger="result in ('missing', 'damaged')">
+                                    <field name="asset_id"/>
+                                    <field name="expected_department_id"/>
+                                    <field name="expected_location_id"/>
+                                    <field name="result" widget="badge" decoration-warning="result == 'pending'" decoration-success="result == 'verified'" decoration-danger="result in ('missing', 'damaged')"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_audit_cycle" model="ir.actions.act_window">
+        <field name="name">Audit Cycles</field>
+        <field name="res_model">assetflow.audit.cycle</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

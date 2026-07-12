@@ -12,11 +12,6 @@
                             <field name="employee_code"/>
                             <field name="assetflow_department_id"/>
                             <field name="assetflow_role"/>
-                            <field name="groups_id" widget="many2many_tags" 
-                                   domain="[('category_id', '=', %(assetflow_base.module_category_assetflow)d)]" 
-                                   string="AssetFlow Access Rights" 
-                                   options="{'no_create': True}"
-                                   groups="assetflow_base.group_assetflow_admin"/>
                         </group>
                     </group>
                 </page>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Audits Top Menu -->
+    <menuitem id="menu_assetflow_audits_root"
+              name="Audits"
+              parent="assetflow_base.menu_assetflow_root"
+              sequence="40"/>
+
+    <menuitem id="menu_audit_cycles"
+              name="Audit Cycles"
+              parent="menu_assetflow_audits_root"
+              action="action_audit_cycle"
+              sequence="10"/>
+              
+    <menuitem id="menu_audit_discrepancies"
+              name="Discrepancies"
+              parent="menu_assetflow_audits_root"
+              action="action_audit_discrepancy"
+              sequence="20"/>
+</odoo>

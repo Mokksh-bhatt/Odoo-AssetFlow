@@ -20,7 +20,6 @@ class ResUsers(models.Model):
         help='Computed role based on assigned security groups.'
     )
 
-    @api.depends('groups_id')
     def _compute_assetflow_role(self):
         """
         Computes a display-only role based on the highest privilege group 
