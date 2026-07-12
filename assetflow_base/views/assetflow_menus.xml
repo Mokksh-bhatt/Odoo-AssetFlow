@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_assetflow_root" 
+              name="AssetFlow" 
+              web_icon="assetflow_base,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Organization Setup Submenu -->
+    <menuitem id="menu_assetflow_organization_setup" 
+              name="Organization Setup" 
+              parent="menu_assetflow_root" 
+              sequence="100"
+              groups="assetflow_base.group_assetflow_admin"/>
+</odoo>

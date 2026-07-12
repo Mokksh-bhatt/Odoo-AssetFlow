@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- AssetFlow root menu is defined in assetflow_base as menu_assetflow_root -->
+
+    <menuitem id="menu_assetflow_assets_main"
+              name="Assets"
+              parent="assetflow_base.menu_assetflow_root"
+              action="action_assetflow_asset"
+              sequence="10"/>
+
+    <menuitem id="menu_assetflow_locations"
+              name="Locations"
+              parent="assetflow_base.menu_assetflow_root"
+              action="action_assetflow_location"
+              sequence="20"/>
+</odoo>

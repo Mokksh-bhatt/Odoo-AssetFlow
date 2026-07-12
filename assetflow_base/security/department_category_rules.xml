@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Departments -->
+        <record id="rule_department_employee_read" model="ir.rule">
+            <field name="name">AssetFlow Department: Employee Read</field>
+            <field name="model_id" ref="model_assetflow_department"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_assetflow_employee'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+        
+        <record id="rule_department_admin_all" model="ir.rule">
+            <field name="name">AssetFlow Department: Admin All</field>
+            <field name="model_id" ref="model_assetflow_department"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_assetflow_admin'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <!-- Categories -->
+        <record id="rule_category_employee_read" model="ir.rule">
+            <field name="name">AssetFlow Category: Employee Read</field>
+            <field name="model_id" ref="model_assetflow_category"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_assetflow_employee'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="rule_category_admin_all" model="ir.rule">
+            <field name="name">AssetFlow Category: Admin All</field>
+            <field name="model_id" ref="model_assetflow_category"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_assetflow_admin'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+    </data>
+</odoo>
