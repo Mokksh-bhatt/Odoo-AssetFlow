@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Utilization Report -->
+    <record id="view_assetflow_report_utilization_pivot" model="ir.ui.view">
+        <field name="name">assetflow.report.asset.utilization.pivot</field>
+        <field name="model">assetflow.report.asset.utilization</field>
+        <field name="arch" type="xml">
+            <pivot string="Asset Utilization" disable_linking="True">
+                <field name="category_id" type="row"/>
+                <field name="asset_id" type="row"/>
+                <field name="allocation_days" type="measure"/>
+                <field name="idle_days" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_assetflow_report_utilization_graph" model="ir.ui.view">
+        <field name="name">assetflow.report.asset.utilization.graph</field>
+        <field name="model">assetflow.report.asset.utilization</field>
+        <field name="arch" type="xml">
+            <graph string="Asset Utilization" type="bar">
+                <field name="category_id"/>
+                <field name="allocation_days" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_assetflow_report_utilization" model="ir.actions.act_window">
+        <field name="name">Asset Utilization</field>
+        <field name="res_model">assetflow.report.asset.utilization</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+
+    <!-- Booking Heatmap Report -->
+    <record id="view_assetflow_report_heatmap_pivot" model="ir.ui.view">
+        <field name="name">assetflow.report.booking.heatmap.pivot</field>
+        <field name="model">assetflow.report.booking.heatmap</field>
+        <field name="arch" type="xml">
+            <pivot string="Booking Heatmap" disable_linking="True">
+                <field name="day_of_week" type="row"/>
+                <field name="hour_of_day" type="col"/>
+                <field name="booking_count" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_assetflow_report_heatmap_graph" model="ir.ui.view">
+        <field name="name">assetflow.report.booking.heatmap.graph</field>
+        <field name="model">assetflow.report.booking.heatmap</field>
+        <field name="arch" type="xml">
+            <graph string="Booking Heatmap" type="line">
+                <field name="hour_of_day" type="row"/>
+                <field name="booking_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_assetflow_report_heatmap" model="ir.actions.act_window">
+        <field name="name">Booking Heatmap</field>
+        <field name="res_model">assetflow.report.booking.heatmap</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+    
+    <!-- Maintenance Frequency Report (Using base maintenance model) -->
+    <record id="action_assetflow_report_maintenance" model="ir.actions.act_window">
+        <field name="name">Maintenance Frequency</field>
+        <field name="res_model">assetflow.maintenance</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="context">{'group_by': ['asset_id', 'technician_id']}</field>
+    </record>
+    
+    <!-- Department Allocation Summary (Using base allocation model) -->
+    <record id="action_assetflow_report_allocation" model="ir.actions.act_window">
+        <field name="name">Department Allocations</field>
+        <field name="res_model">assetflow.allocation</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="context">{'group_by': ['department_id']}</field>
+    </record>
+</odoo>

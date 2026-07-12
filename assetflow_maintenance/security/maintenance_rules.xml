@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Employees can only see their own requests -->
+        <record id="rule_maintenance_employee" model="ir.rule">
+            <field name="name">AssetFlow Maintenance: Employee</field>
+            <field name="model_id" ref="model_assetflow_maintenance"/>
+            <field name="domain_force">[('requested_by', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_employee'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+        
+        <!-- Department Heads can see requests for their department -->
+        <record id="rule_maintenance_dept_head" model="ir.rule">
+            <field name="name">AssetFlow Maintenance: Department Head</field>
+            <field name="model_id" ref="model_assetflow_maintenance"/>
+            <field name="domain_force">[('department_id', '=', user.assetflow_department_id.id)]</field>
+            <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_department_head'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <!-- Managers see all -->
+        <record id="rule_maintenance_manager" model="ir.rule">
+            <field name="name">AssetFlow Maintenance: Manager All</field>
+            <field name="model_id" ref="model_assetflow_maintenance"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_asset_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+        
+        <!-- Admin sees all -->
+        <record id="rule_maintenance_admin" model="ir.rule">
+            <field name="name">AssetFlow Maintenance: Admin All</field>
+            <field name="model_id" ref="model_assetflow_maintenance"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('assetflow_base.group_assetflow_admin'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+    </data>
+</odoo>

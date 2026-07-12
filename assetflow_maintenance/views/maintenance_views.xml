@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_maintenance_tree" model="ir.ui.view">
+        <field name="name">assetflow.maintenance.tree</field>
+        <field name="model">assetflow.maintenance</field>
+        <field name="arch" type="xml">
+            <list string="Maintenance Requests">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="requested_by"/>
+                <field name="maintenance_type"/>
+                <field name="priority"/>
+                <field name="request_date"/>
+                <field name="scheduled_date"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_maintenance_form" model="ir.ui.view">
+        <field name="name">assetflow.maintenance.form</field>
+        <field name="model">assetflow.maintenance</field>
+        <field name="arch" type="xml">
+            <form string="Maintenance Request">
+                <header>
+                    <button name="action_submit" string="Submit" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Approve" type="object" class="oe_highlight" invisible="state != 'submitted'" groups="assetflow_base.group_assetflow_department_head,assetflow_base.group_assetflow_asset_manager,assetflow_base.group_assetflow_admin"/>
+                    <button name="action_reject" string="Reject" type="object" invisible="state != 'submitted'" groups="assetflow_base.group_assetflow_department_head,assetflow_base.group_assetflow_asset_manager,assetflow_base.group_assetflow_admin"/>
+                    <button name="action_complete" string="Complete" type="object" class="oe_highlight" invisible="state != 'approved'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id" readonly="state != 'draft'"/>
+                            <field name="requested_by" readonly="state != 'draft'"/>
+                            <field name="department_id"/>
+                            <field name="technician_id" readonly="state in ['completed', 'rejected']"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="request_date" readonly="state != 'draft'"/>
+                            <field name="scheduled_date" readonly="state in ['completed', 'rejected']"/>
+                            <field name="maintenance_type" readonly="state != 'draft'"/>
+                            <field name="priority" readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="General" name="general">
+                            <group>
+                                <field name="description" readonly="state != 'draft'"/>
+                            </group>
+                        </page>
+                        <page string="Work" name="work">
+                            <group>
+                                <field name="completion_date" readonly="state == 'completed'"/>
+                                <field name="work_performed" readonly="state == 'completed'"/>
+                            </group>
+                        </page>
+                        <page string="Costs" name="costs">
+                            <group>
+                                <field name="estimated_cost" readonly="state == 'completed'"/>
+                                <field name="actual_cost" readonly="state == 'completed'"/>
+                            </group>
+                        </page>
+                        <page string="Approval" name="approval">
+                            <group>
+                                <field name="approver_id"/>
+                                <field name="approval_date"/>
+                                <field name="rejection_reason"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_maintenance_calendar" model="ir.ui.view">
+        <field name="name">assetflow.maintenance.calendar</field>
+        <field name="model">assetflow.maintenance</field>
+        <field name="arch" type="xml">
+            <calendar string="Maintenance Calendar" date_start="scheduled_date" color="technician_id">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="state" filters="1"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_maintenance_search" model="ir.ui.view">
+        <field name="name">assetflow.maintenance.search</field>
+        <field name="model">assetflow.maintenance</field>
+        <field name="arch" type="xml">
+            <search string="Maintenance Requests">
+                <field name="name"/>
+                <field name="asset_id"/>
+                <field name="technician_id"/>
+                <separator/>
+                <filter string="My Requests" name="my_requests" domain="[('requested_by', '=', uid)]"/>
+                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Asset" name="group_by_asset" domain="[]" context="{'group_by': 'asset_id'}"/>
+                    <filter string="State" name="group_by_state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Technician" name="group_by_technician" domain="[]" context="{'group_by': 'technician_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_maintenance" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">assetflow.maintenance</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="search_view_id" ref="view_maintenance_search"/>
+    </record>
+</odoo>

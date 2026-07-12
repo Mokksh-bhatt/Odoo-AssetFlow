@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_assetflow_reports_root"
+              name="Reports"
+              parent="assetflow_base.menu_assetflow_root"
+              sequence="50"
+              groups="assetflow_base.group_assetflow_department_head,assetflow_base.group_assetflow_asset_manager,assetflow_base.group_assetflow_admin"/>
+
+    <menuitem id="menu_report_utilization"
+              name="Asset Utilization"
+              parent="menu_assetflow_reports_root"
+              action="action_assetflow_report_utilization"
+              sequence="10"/>
+              
+    <menuitem id="menu_report_heatmap"
+              name="Booking Heatmap"
+              parent="menu_assetflow_reports_root"
+              action="action_assetflow_report_heatmap"
+              sequence="20"/>
+              
+    <menuitem id="menu_report_maintenance"
+              name="Maintenance Frequency"
+              parent="menu_assetflow_reports_root"
+              action="action_assetflow_report_maintenance"
+              sequence="30"/>
+              
+    <menuitem id="menu_report_allocation"
+              name="Department Allocations"
+              parent="menu_assetflow_reports_root"
+              action="action_assetflow_report_allocation"
+              sequence="40"/>
+</odoo>

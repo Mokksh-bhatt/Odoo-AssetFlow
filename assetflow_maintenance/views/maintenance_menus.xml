@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_maintenance_root"
+              name="Maintenance"
+              parent="assetflow_base.menu_assetflow_root"
+              sequence="30"/>
+
+    <menuitem id="menu_maintenance_requests"
+              name="Maintenance Requests"
+              parent="menu_maintenance_root"
+              action="action_maintenance"
+              sequence="10"/>
+</odoo>
