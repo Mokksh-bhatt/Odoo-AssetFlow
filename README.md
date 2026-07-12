@@ -1,5 +1,9 @@
 # AssetFlow (Odoo Hackathon)
 
+## Contributors
+- **Mokksh**
+- **Meet Sharma**
+
 ## Project Structure
 
 docs/
