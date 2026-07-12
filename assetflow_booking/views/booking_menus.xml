@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_assetflow_bookings_root"
+              name="Bookings"
+              parent="assetflow_base.menu_assetflow_root"
+              sequence="30"/>
+
+    <menuitem id="menu_assetflow_booking_calendar"
+              name="Booking Calendar"
+              parent="menu_assetflow_bookings_root"
+              action="action_assetflow_booking_calendar"
+              sequence="10"/>
+
+    <menuitem id="menu_assetflow_booking_my"
+              name="My Bookings"
+              parent="menu_assetflow_bookings_root"
+              action="action_assetflow_booking_my"
+              sequence="20"/>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_assetflow_booking_employee,assetflow.booking.employee,model_assetflow_booking,assetflow_base.group_assetflow_employee,1,1,1,0
+access_assetflow_booking_department_head,assetflow.booking.department_head,model_assetflow_booking,assetflow_base.group_assetflow_department_head,1,1,1,0
+access_assetflow_booking_asset_manager,assetflow.booking.asset_manager,model_assetflow_booking,assetflow_base.group_assetflow_asset_manager,1,1,1,1
+access_assetflow_booking_admin,assetflow.booking.admin,model_assetflow_booking,assetflow_base.group_assetflow_admin,1,1,1,1

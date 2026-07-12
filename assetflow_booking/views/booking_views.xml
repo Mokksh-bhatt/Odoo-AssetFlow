@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_assetflow_booking_tree" model="ir.ui.view">
+        <field name="name">assetflow.booking.tree</field>
+        <field name="model">assetflow.booking</field>
+        <field name="arch" type="xml">
+            <tree string="Bookings" decoration-info="status == 'upcoming'" decoration-success="status == 'ongoing'" decoration-muted="status == 'cancelled'">
+                <field name="asset_id"/>
+                <field name="booked_by_id"/>
+                <field name="department_id" optional="show"/>
+                <field name="start_datetime"/>
+                <field name="end_datetime"/>
+                <field name="status" widget="badge" 
+                       decoration-info="status == 'upcoming'" 
+                       decoration-success="status == 'ongoing'" 
+                       decoration-muted="status == 'cancelled'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Calendar View -->
+    <record id="view_assetflow_booking_calendar" model="ir.ui.view">
+        <field name="name">assetflow.booking.calendar</field>
+        <field name="model">assetflow.booking</field>
+        <field name="arch" type="xml">
+            <calendar string="Bookings" date_start="start_datetime" date_stop="end_datetime" color="status">
+                <field name="asset_id"/>
+                <field name="booked_by_id"/>
+                <field name="status"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_assetflow_booking_form" model="ir.ui.view">
+        <field name="name">assetflow.booking.form</field>
+        <field name="model">assetflow.booking</field>
+        <field name="arch" type="xml">
+            <form string="Booking">
+                <header>
+                    <button name="action_complete" string="Mark Completed" type="object" class="oe_highlight" invisible="status not in ('ongoing', 'upcoming')"/>
+                    <button name="action_cancel" string="Cancel Booking" type="object" invisible="status in ('completed', 'cancelled')"/>
+                    <field name="status" widget="statusbar" statusbar_visible="upcoming,ongoing,completed"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Cancelled" bg_color="text-bg-danger" invisible="status != 'cancelled'"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Details">
+                            <field name="asset_id" readonly="status != 'upcoming'" options="{'no_create': True}"/>
+                            <field name="booked_by_id" readonly="status != 'upcoming'"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="purpose" readonly="status != 'upcoming'"/>
+                        </group>
+                        <group string="Schedule">
+                            <field name="start_datetime" readonly="status != 'upcoming'"/>
+                            <field name="end_datetime" readonly="status != 'upcoming'"/>
+                            <field name="reminder_sent" readonly="1" groups="base.group_no_one"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Additional notes about the booking..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_assetflow_booking_search" model="ir.ui.view">
+        <field name="name">assetflow.booking.search</field>
+        <field name="model">assetflow.booking</field>
+        <field name="arch" type="xml">
+            <search string="Search Bookings">
+                <field name="asset_id"/>
+                <field name="booked_by_id"/>
+                
+                <separator/>
+                <filter string="Upcoming" name="upcoming" domain="[('status', '=', 'upcoming')]"/>
+                <filter string="Ongoing" name="ongoing" domain="[('status', '=', 'ongoing')]"/>
+                <filter string="Completed" name="completed" domain="[('status', '=', 'completed')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('status', '=', 'cancelled')]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Asset" name="group_by_asset" context="{'group_by': 'asset_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                    <filter string="Department" name="group_by_department" context="{'group_by': 'department_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Window Actions -->
+    <record id="action_assetflow_booking_calendar" model="ir.actions.act_window">
+        <field name="name">Booking Calendar</field>
+        <field name="res_model">assetflow.booking</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="search_view_id" ref="view_assetflow_booking_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new asset booking
+            </p>
+        </field>
+    </record>
+
+    <record id="action_assetflow_booking_my" model="ir.actions.act_window">
+        <field name="name">My Bookings</field>
+        <field name="res_model">assetflow.booking</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="context">{'search_default_upcoming': 1}</field>
+        <field name="domain">[('booked_by_id', '=', uid)]</field>
+        <field name="search_view_id" ref="view_assetflow_booking_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Book an asset today!
+            </p>
+        </field>
+    </record>
+</odoo>
