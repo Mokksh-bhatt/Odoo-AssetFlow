@@ -16,7 +16,6 @@ addons/
   assetflow_dashboard/
   assetflow_reports/
 
-Generate each addon one at a time using Antigravity.
 
 Recommended generation order:
 1. assetflow_base
