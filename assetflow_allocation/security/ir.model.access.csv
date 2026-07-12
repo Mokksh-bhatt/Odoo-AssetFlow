@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_allocation_employee,allocation.employee,model_assetflow_allocation,assetflow_base.group_assetflow_employee,1,0,0,0
+access_allocation_dept,allocation.dept,model_assetflow_allocation,assetflow_base.group_assetflow_department_head,1,0,0,0
+access_allocation_manager,allocation.manager,model_assetflow_allocation,assetflow_base.group_assetflow_asset_manager,1,1,1,1
+access_allocation_admin,allocation.admin,model_assetflow_allocation,assetflow_base.group_assetflow_admin,1,1,1,1
+access_transfer_employee,transfer.employee,model_assetflow_transfer_request,assetflow_base.group_assetflow_employee,1,1,1,0
+access_transfer_dept,transfer.dept,model_assetflow_transfer_request,assetflow_base.group_assetflow_department_head,1,1,1,0
+access_transfer_manager,transfer.manager,model_assetflow_transfer_request,assetflow_base.group_assetflow_asset_manager,1,1,1,1
+access_transfer_admin,transfer.admin,model_assetflow_transfer_request,assetflow_base.group_assetflow_admin,1,1,1,1

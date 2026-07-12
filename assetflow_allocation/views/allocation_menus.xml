@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_assetflow_allocations_root"
+              name="Allocation &amp; Transfers"
+              parent="assetflow_base.menu_assetflow_root"
+              sequence="40"/>
+
+    <menuitem id="menu_assetflow_allocations"
+              name="Allocations"
+              parent="menu_assetflow_allocations_root"
+              action="action_assetflow_allocation"
+              sequence="10"/>
+
+    <menuitem id="menu_assetflow_transfer_requests"
+              name="Transfer Requests"
+              parent="menu_assetflow_allocations_root"
+              action="action_assetflow_transfer_request"
+              sequence="20"/>
+</odoo>
