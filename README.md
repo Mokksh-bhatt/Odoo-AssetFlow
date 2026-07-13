@@ -5,6 +5,7 @@
   <em>Developed for the Odoo Hackathon</em>
 </p>
 
+A modular Odoo ERP extension implementing enterprise asset management for Odoo 19 Community Edition.
 ---
 
 ## 👥 Contributors
